@@ -1,0 +1,47 @@
+export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ message: 'Method Not Allowed' });
+  }
+
+  const { email } = req.body;
+
+  if (!email) {
+    return res.status(400).json({ message: 'Email is required' });
+  }
+
+  try {
+    const response = await fetch('https://api.airtable.com/v0/YOUR_BASE_ID/YOUR_TABLE_NAME', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.AIRTABLE_API_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        fields: {
+          Email: email
+        }
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to add email to Airtable');
+    }
+
+    return res.status(200).json({ message: 'Thanks, you’re on the list!' });
+  } catch (error) {
+    return res.status(500).json({ message: error.message || 'Something went wrong' });
+  }
+}
+cd ~/Documents/smarterfit-landing
+
+cd ~/Documents/smarterfit-landing
+
+npm start
+
+cd ~/Documents/smarter-fit\ landing
+
+npm start
+
+ls
+
+
