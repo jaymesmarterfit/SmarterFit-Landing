@@ -1,38 +1,148 @@
-.App {
-  text-align: center;
+/* 🌈 Global Smoothness */
+html,
+body {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  font-family: 'Inter', 'Poppins', sans-serif;
+  background: transparent;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+/* ✨ Gradient Animation */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* 💫 Parallax Subtle Float */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
   }
-  to {
-    transform: rotate(360deg);
+  50% {
+    transform: translateY(-6px);
+  }
+  100% {
+    transform: translateY(0px);
   }
 }
+
+/* 💜 Brand Gradient (used across components) */
+:root {
+  --gradient-primary: linear-gradient(135deg, #9333ea, #14b8a6);
+  --gradient-light: linear-gradient(135deg, #c084fc, #5eead4);
+  --gradient-bg: radial-gradient(circle at 20% 20%, #f3e8ff 0%, #dbeafe 25%, #e0f2fe 50%, #f0fdfa 100%);
+}
+
+/* ☁️ Section Backgrounds */
+body.light {
+  background: var(--gradient-bg);
+}
+
+body.dark {
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: #f1f5f9;
+}
+
+/* 📦 Feature Cards */
+.card {
+  border-radius: 1.5rem;
+  transition: all 0.3s ease;
+  transform: translateY(0);
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(147, 51, 234, 0.15);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.3), rgba(147, 51, 234, 0.05));
+}
+
+/* 🔘 Buttons */
+button {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+button:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+}
+
+/* 💥 Join Button Ripple */
+button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* 🌙 Theme Toggle */
+.theme-toggle {
+  position: fixed;
+  top: 1.2rem;
+  right: 1.2rem;
+  padding: 0.75rem;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(147, 51, 234, 0.3);
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* 💎 Logo Glow Animation */
+@keyframes pulseGlow {
+  0% {
+    filter: drop-shadow(0 0 0 rgba(147, 51, 234, 0.3));
+  }
+  50% {
+    filter: drop-shadow(0 0 25px rgba(20, 184, 166, 0.6));
+  }
+  100% {
+    filter: drop-shadow(0 0 0 rgba(147, 51, 234, 0.3));
+  }
+}
+
+img[alt="SmarterFit Logo"] {
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+
+/* ⬆️ Back to Top */
+button.fixed {
+  transition: all 0.3s ease-in-out;
+}
+
+button.fixed:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(147, 51, 234, 0.4);
+}
+
+/* 📱 Phone Preview Hover */
+.phone-preview {
+  transition: all 0.8s ease;
+  animation: float 6s ease-in-out infinite;
+}
+
+/* 🌀 Scrollbar (for extra polish) */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #9333ea, #14b8a6);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
