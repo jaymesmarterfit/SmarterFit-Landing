@@ -1,0 +1,109 @@
+/* ==============================
+   CHROME BEZEL FRAME
+============================== */
+
+.chrome-bezel {
+  padding: 14px;
+  border-radius: 40px;
+  background: radial-gradient(circle at 10% 0%, #00f2ff33, #000000dd);
+  box-shadow:
+    0 40px 80px rgba(0, 0, 0, 0.65),
+    0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+/* THIS IS THE MOST IMPORTANT PIECE */
+.chrome-inner {
+  position: relative;
+  width: min(360px, 70vw);
+  aspect-ratio: 9 / 19.5;
+  border-radius: 32px;
+  background: radial-gradient(circle at 50% 0%, #0af 0, #020616 60%);
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.04),
+    0 22px 55px rgba(0, 0, 0, 0.75);
+}
+
+/* TOP NOTCH */
+.chrome-notch {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 30px;
+  width: 120px;
+  border-radius: 18px;
+  background: radial-gradient(circle at 30% 30%, #111827, #020617);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.notch-camera,
+.notch-sensor {
+  display: inline-block;
+  border-radius: 999px;
+}
+
+.notch-camera {
+  width: 12px;
+  height: 12px;
+  background: radial-gradient(circle at 30% 30%, #22d3ee, #020617);
+}
+
+.notch-sensor {
+  width: 24px;
+  height: 8px;
+  background: radial-gradient(circle at 30% 30%, #64748b, #020617);
+}
+
+/* GESTURE BAR */
+.chrome-home-bar {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90px;
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #22d3ee, #a855f7);
+  opacity: 0.9;
+}
+/* ==============================
+   CHROME BEZEL FRAME — PREMIUM NEON EDGE
+============================== */
+
+.chrome-bezel {
+  position: relative;
+  border-radius: 38px;
+  overflow: hidden;
+
+  /* --- BASE SHADOW --- */
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    0 40px 80px rgba(0, 0, 0, 0.65);
+
+  transition: 0.3s ease;
+}
+
+/* 🌙 DARK MODE — neon teal edge */
+.dark .chrome-bezel {
+  box-shadow:
+    0 0 0 1px rgba(0, 255, 255, 0.22),     /* crisp neon outline */
+    0 0 18px rgba(0, 255, 255, 0.35),      /* soft glow around frame */
+    inset 0 0 12px rgba(0, 255, 255, 0.12), /* subtle inner glow */
+    0 40px 80px rgba(0, 0, 0, 0.65);
+}
+
+/* ☀️ LIGHT MODE — keep minimal / premium */
+.light .chrome-bezel {
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.06),
+    0 25px 45px rgba(0, 0, 0, 0.20);
+}
+
+
+
+
+

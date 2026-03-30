@@ -1,0 +1,8 @@
+<svg width="110" height="28" viewBox="0 0 110 28" xmlns="http://www.w3.org/2000/svg">
+<circle cx="10" cy="6" r="6" fill="black"/>
+<circle cx="22" cy="6" r="6" fill="black"/>
+<circle cx="10" cy="18" r="6" fill="black"/>
+<circle cx="22" cy="18" r="6" fill="black"/>
+<circle cx="34" cy="12" r="6" fill="black"/>
+<text x="50" y="20" font-size="16" font-family="Arial, sans-serif" fill="black">Figma</text>
+</svg>

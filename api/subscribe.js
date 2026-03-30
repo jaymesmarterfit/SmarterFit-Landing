@@ -1,51 +1,90 @@
-export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
+import fetch from "node-fetch";
 
-  const { email } = req.body;
-
-  if (!email || !email.includes('@')) {
-    return res.status(400).json({ error: 'Invalid email address' });
+export default async function subscribeRoute(req, res) {
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method not allowed" });
   }
 
   try {
+    const {
+      email,
+      name,
+      company,
+      website,
+      monthlyOrders,
+      message,
+    } = req.body;
+
+    console.log("📩 Incoming pilot request:", {
+      email,
+      name,
+      company,
+      website,
+      monthlyOrders,
+      message,
+    });
+
     const AIRTABLE_TOKEN = process.env.AIRTABLE_TOKEN;
     const BASE_ID = process.env.AIRTABLE_BASE_ID;
     const TABLE_NAME = process.env.AIRTABLE_TABLE_NAME;
 
-    console.log('BASE_ID:', BASE_ID);
-    console.log('TABLE_NAME:', TABLE_NAME);
-    console.log('AIRTABLE_TOKEN:', AIRTABLE_TOKEN);
-    console.log("Received:", req.body);
+    if (!AIRTABLE_TOKEN || !BASE_ID || !TABLE_NAME) {
+      console.error("❌ Missing env vars", {
+        hasToken: !!AIRTABLE_TOKEN,
+        hasBaseId: !!BASE_ID,
+        hasTableName: !!TABLE_NAME,
+      });
 
+      return res.status(500).json({
+        error: "Missing Airtable environment variables",
+      });
+    }
 
+    const airtableUrl = `https://api.airtable.com/v0/${BASE_ID}/${encodeURIComponent(TABLE_NAME)}`;
 
-    const response = await fetch(`https://api.airtable.com/v0/${BASE_ID}/${TABLE_NAME}`, {
-      method: 'POST',
+    console.log("📡 Posting to Airtable:", {
+      airtableUrl,
+      tableName: TABLE_NAME,
+      baseId: BASE_ID,
+    });
+
+    const response = await fetch(airtableUrl, {
+      method: "POST",
       headers: {
         Authorization: `Bearer ${AIRTABLE_TOKEN}`,
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         fields: {
-          Email: req.body.email,
+          Email: email || "",
+          Name: name || "",
+          Company: company || "",
+          Website: website || "",
+          "Monthly Orders": monthlyOrders || "",
+          Message: message || "",
         },
       }),
     });
 
     const data = await response.json();
 
+    console.log("📥 Airtable response status:", response.status);
+    console.log("📥 Airtable response data:", data);
+
     if (!response.ok) {
-      console.error('Airtable Error:', data);
-      return res.status(500).json({ error: 'Failed to subscribe. Airtable error.' });
+      return res.status(response.status).json({
+        error: "Airtable failed",
+        details: data,
+      });
     }
 
-    return res.status(200).json({ message: 'Successfully subscribed!' });
+    console.log("✅ Successfully added pilot request:", email);
+    return res.status(200).json({ success: true, record: data });
   } catch (err) {
-    console.error('Server Error:', err);
-    return res.status(500).json({ error: 'Server error. Please try again.' });
+    console.error("❌ Server Error:", err);
+    return res.status(500).json({
+      error: "Server error",
+      details: err.message,
+    });
   }
 }
-
-

@@ -1,39 +1,35 @@
 {
   "name": "smarterfit-landing",
   "version": "1.0.0",
-  "type": "module",
   "private": true,
-  "dependencies": {
-    "canvas-confetti": "^1.9.3",
-    "cors": "^2.8.5",
-    "dotenv": "^16.6.1",
-    "express": "^4.21.2",
-    "framer-motion": "^12.23.24",
-    "node-fetch": "^3.3.2",
-    "react": "^18.2.0",
-    "react-confetti": "^6.4.0",
-    "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
-  },
-  "devDependencies": {
-    "concurrently": "^9.2.1",
-    "nodemon": "^3.1.10"
-  },
+  "description": "SmarterFit landing page built with React, Framer Motion, and TailwindCSS",
+  "main": "src/index.js",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "nodemon server.js",
-    "dev": "concurrently \"npm run start\" \"npm run server\""
+    "server": "node server.js"
   },
-  "proxy": "http://localhost:3001",
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "framer-motion": "^11.0.0",
+    "lottie-react": "^2.4.1",
+    "lucide-react": "^0.552.0",
+    "node-fetch": "^3.3.2",
+    "react": "^18.3.1",
+    "react-confetti": "^6.1.0",
+    "react-dom": "^18.3.1",
+    "react-parallax-tilt": "^1.7.153",
+    "react-scripts": "5.0.1",
+    "tailwindcss": "^3.4.3",
+    "web-vitals": "^5.1.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.31"
   },
   "browserslist": {
     "production": [
