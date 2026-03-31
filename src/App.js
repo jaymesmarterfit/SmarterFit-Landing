@@ -672,14 +672,37 @@ const res = await fetch(`${API_BASE}/api/subscribe`, {
           </div>
 
           <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              width: "100%",
-            }}
-          >
-            <ActiveDemoComponent />
-          </div>
+  style={{
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    width: "100%",
+    gap: "14px",
+  }}
+>
+  <div
+    style={{
+      display: "flex",
+      justifyContent: "center",
+      width: "100%",
+    }}
+  >
+    <ActiveDemoComponent />
+  </div>
+
+  <p
+    style={{
+      margin: 0,
+      fontSize: "12px",
+      lineHeight: 1.5,
+      textAlign: "center",
+      color: darkMode ? "rgba(226,232,240,0.55)" : "rgba(15,23,42,0.55)",
+      letterSpacing: "0.02em",
+    }}
+  >
+    Demo brands shown for illustrative purposes only. No affiliation.
+  </p>
+</div>
         </section>
 
         <section className="fit-graph-section">
