@@ -4,7 +4,8 @@ import "./App.css";
 import CreateFitPassport from "./components/CreateFitPassport";
 import CreateFitPassportPilot from "./components/CreateFitPassport_PILOT";
 import CreateFitPassportLorna from "./components/CreateFitPassport_LORNA";
-
+import CreateFitPassportAutomotive from "./components/CreateFitPassport_AUTOMOTIVE";
+import CreateFitPassportSleep from "./components/CreateFitPassport_SLEEP";
 import LightLogo from "./assets/SmarterFit_Light.png";
 import DarkLogo from "./assets/SmarterFit_Dark.png";
 
@@ -16,6 +17,7 @@ import {
   Ruler,
   Sparkles,
   X,
+  CarFront,
 } from "lucide-react";
 
 const DEMO_CONFIG = {
@@ -81,6 +83,50 @@ const DEMO_CONFIG = {
       "0 10px 24px rgba(6,182,212,0.06), 0 0 18px rgba(236,72,153,0.04)",
     badge: "Flagship Pilot Mode",
   },
+  automotive: {
+    label: "Automotive Comfort",
+    current: "Automotive Comfort Active",
+    audience: "Investor / Innovation / Future Mobility",
+    focus: "Human comfort intelligence beyond apparel",
+    component: CreateFitPassportAutomotive,
+    eyebrowColorDark: "rgba(165,243,252,0.96)",
+    eyebrowColorLight: "#0f766e",
+    accentBorderDark: "rgba(45,212,191,0.18)",
+    accentBorderLight: "rgba(20,184,166,0.14)",
+    panelGlowDark:
+      "0 24px 80px rgba(0,0,0,0.42), 0 0 0 1px rgba(45,212,191,0.05), 0 0 48px rgba(34,211,238,0.06)",
+    activePillDark:
+      "linear-gradient(135deg, rgba(13,148,136,0.92), rgba(8,145,178,0.92))",
+    activePillLight:
+      "linear-gradient(135deg, rgba(20,184,166,0.22), rgba(34,211,238,0.22))",
+    metaGlowDark:
+      "0 14px 36px rgba(45,212,191,0.08), 0 0 24px rgba(34,211,238,0.05)",
+    metaGlowLight:
+      "0 10px 24px rgba(20,184,166,0.06), 0 0 18px rgba(34,211,238,0.04)",
+    badge: "Future Surface Mode",
+  },
+  sleep: {
+    label: "Sleep Intelligence",
+    current: "Sleep Intelligence Active",
+    audience: "Investor / Consumer / Wellness",
+    focus: "Adaptive recovery and sleep environments",
+    component: CreateFitPassportSleep,
+    eyebrowColorDark: "rgba(196,181,253,0.96)",
+    eyebrowColorLight: "#7c3aed",
+    accentBorderDark: "rgba(168,85,247,0.18)",
+    accentBorderLight: "rgba(168,85,247,0.14)",
+    panelGlowDark:
+      "0 24px 80px rgba(0,0,0,0.42), 0 0 0 1px rgba(168,85,247,0.05), 0 0 48px rgba(244,114,182,0.06)",
+    activePillDark:
+      "linear-gradient(135deg, rgba(124,58,237,0.94), rgba(219,39,119,0.92))",
+    activePillLight:
+      "linear-gradient(135deg, rgba(168,85,247,0.22), rgba(236,72,153,0.22))",
+    metaGlowDark:
+      "0 14px 36px rgba(168,85,247,0.08), 0 0 24px rgba(244,114,182,0.05)",
+    metaGlowLight:
+      "0 10px 24px rgba(168,85,247,0.06), 0 0 18px rgba(244,114,182,0.04)",
+    badge: "Future Surface Mode",
+  },
 };
 
 function App() {
@@ -129,57 +175,57 @@ function App() {
   };
 
   const handlePilotSubmit = async (e) => {
-  e.preventDefault();
-  setPilotLoading(true);
+    e.preventDefault();
+    setPilotLoading(true);
 
-  try {
-    const API_BASE =
-  process.env.REACT_APP_API_BASE_URL || "http://localhost:3001";
+    try {
+      const API_BASE =
+        process.env.REACT_APP_API_BASE_URL || "http://localhost:3001";
 
-const res = await fetch(`${API_BASE}/api/subscribe`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: pilotForm.email,
-        name: pilotForm.name,
-        company: pilotForm.company,
-        website: pilotForm.website,
-        monthlyOrders: pilotForm.monthlyOrders,
-        message: pilotForm.message,
-      }),
-    });
+      const res = await fetch(`${API_BASE}/api/subscribe`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: pilotForm.email,
+          name: pilotForm.name,
+          company: pilotForm.company,
+          website: pilotForm.website,
+          monthlyOrders: pilotForm.monthlyOrders,
+          message: pilotForm.message,
+        }),
+      });
 
-    const data = await res.json();
-    console.log("Pilot submit response:", data);
+      const data = await res.json();
+      console.log("Pilot submit response:", data);
 
-    if (!res.ok) {
-      throw new Error(
-        data?.details?.error?.message ||
-        data?.details?.error ||
-        data?.error ||
-        "Submission failed"
-      );
+      if (!res.ok) {
+        throw new Error(
+          data?.details?.error?.message ||
+            data?.details?.error ||
+            data?.error ||
+            "Submission failed"
+        );
+      }
+
+      setPilotSubmitted(true);
+
+      setPilotForm({
+        name: "",
+        email: "",
+        company: "",
+        website: "",
+        monthlyOrders: "",
+        message: "",
+      });
+    } catch (error) {
+      console.error("Pilot request error:", error);
+      alert(error.message || "Something went wrong. Please try again.");
+    } finally {
+      setPilotLoading(false);
     }
-
-    setPilotSubmitted(true);
-
-    setPilotForm({
-      name: "",
-      email: "",
-      company: "",
-      website: "",
-      monthlyOrders: "",
-      message: "",
-    });
-  } catch (error) {
-    console.error("Pilot request error:", error);
-    alert(error.message || "Something went wrong. Please try again.");
-  } finally {
-    setPilotLoading(false);
-  }
-};
+  };
 
   const controlPanelStyle = {
     width: "100%",
@@ -216,6 +262,10 @@ const res = await fetch(`${API_BASE}/api/subscribe`, {
         ? "radial-gradient(circle, rgba(244,114,182,0.18), transparent 68%)"
         : demoMode === "pilot"
         ? "radial-gradient(circle, rgba(139,92,246,0.18), transparent 68%)"
+        : demoMode === "automotive"
+        ? "radial-gradient(circle, rgba(45,212,191,0.18), transparent 68%)"
+        : demoMode === "sleep"
+        ? "radial-gradient(circle, rgba(168,85,247,0.18), transparent 68%)"
         : "radial-gradient(circle, rgba(56,189,248,0.18), transparent 68%)",
   };
 
@@ -234,6 +284,10 @@ const res = await fetch(`${API_BASE}/api/subscribe`, {
         ? "radial-gradient(circle, rgba(103,232,249,0.18), transparent 70%)"
         : demoMode === "pilot"
         ? "radial-gradient(circle, rgba(59,130,246,0.18), transparent 70%)"
+        : demoMode === "automotive"
+        ? "radial-gradient(circle, rgba(34,211,238,0.18), transparent 70%)"
+        : demoMode === "sleep"
+        ? "radial-gradient(circle, rgba(244,114,182,0.18), transparent 70%)"
         : "radial-gradient(circle, rgba(99,102,241,0.16), transparent 70%)",
   };
 
@@ -263,9 +317,7 @@ const res = await fetch(`${API_BASE}/api/subscribe`, {
       fontSize: "14px",
       transition: "all 0.22s ease",
       color: isActive
-        ? darkMode
-          ? "#f8fbff"
-          : "#0f172a"
+        ? "#f8fbff"
         : darkMode
         ? "rgba(226,232,240,0.72)"
         : "rgba(15,23,42,0.66)",
@@ -382,6 +434,25 @@ const res = await fetch(`${API_BASE}/api/subscribe`, {
     color: darkMode ? "rgba(240,248,255,0.82)" : "#334155",
   };
 
+  const experienceButtonStyle = {
+    marginTop: "18px",
+    padding: "18px 34px",
+    minWidth: "320px",
+    borderRadius: "999px",
+    border: "1px solid rgba(255,255,255,0.08)",
+    background:
+      "linear-gradient(135deg, rgba(45,212,191,0.96), rgba(168,85,247,0.96))",
+    color: "#ffffff",
+    fontWeight: 700,
+    fontSize: "16px",
+    letterSpacing: "0.02em",
+    cursor: "pointer",
+    boxShadow:
+      "0 12px 34px rgba(45,212,191,0.24), 0 0 34px rgba(168,85,247,0.18)",
+    transition: "transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease",
+    filter: "saturate(1.03)",
+  };
+
   return (
     <>
       <div className={`app ${darkMode ? "dark" : "light"} demo-${demoMode}`}>
@@ -394,7 +465,9 @@ const res = await fetch(`${API_BASE}/api/subscribe`, {
             <img
               src={darkMode ? DarkLogo : LightLogo}
               alt="SmarterFit Logo"
-              className={`hero-logo ${darkMode ? "hero-logo-dark" : "hero-logo-light"}`}
+              className={`hero-logo ${
+                darkMode ? "hero-logo-dark" : "hero-logo-light"
+              }`}
             />
           </div>
 
@@ -405,11 +478,15 @@ const res = await fetch(`${API_BASE}/api/subscribe`, {
           <p className="hero-sub">
             SmarterFit gives shoppers a consumer-owned Fit Passport and gives
             brands a privacy-first fit decision layer for better sizing, higher
-            conversion, and fewer returns.
+            conversion, fewer returns, and future human-environment
+            personalization.
           </p>
 
           <div className="hero-cta">
-            <button className="primary-btn hero-primary-btn" onClick={openPilotModal}>
+            <button
+              className="primary-btn hero-primary-btn"
+              onClick={openPilotModal}
+            >
               Request a Pilot
             </button>
 
@@ -521,8 +598,10 @@ const res = await fetch(`${API_BASE}/api/subscribe`, {
                 }}
               >
                 The shopper creates a Fit Passport once. SmarterFit then turns
-                body profile, fit preference, garment behaviour, and real outcomes
-                into a reusable intelligence layer across brands.
+                body profile, fit preference, garment behaviour, and real
+                outcomes into a reusable intelligence layer across brands — and
+                eventually across products and environments that adapt around the
+                human body.
               </p>
 
               <div style={scanMiniPillsStyle}>
@@ -535,15 +614,36 @@ const res = await fetch(`${API_BASE}/api/subscribe`, {
           </div>
 
           <button
-            className="scan-btn"
-            style={{ marginTop: "14px" }}
+            style={experienceButtonStyle}
             onClick={scrollToDemo}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "translateY(-2px) scale(1.02)";
+              e.currentTarget.style.boxShadow =
+                "0 16px 42px rgba(45,212,191,0.34), 0 0 42px rgba(168,85,247,0.24)";
+              e.currentTarget.style.filter = "saturate(1.1) brightness(1.02)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "translateY(0) scale(1)";
+              e.currentTarget.style.boxShadow =
+                "0 12px 34px rgba(45,212,191,0.24), 0 0 34px rgba(168,85,247,0.18)";
+              e.currentTarget.style.filter = "saturate(1.03)";
+            }}
           >
             Experience the Fit Passport
           </button>
 
-          <p className="demo-note">
-            Explore the full Fit Passport journey across brands
+          <p
+            className="demo-note"
+            style={{
+              marginTop: "12px",
+              fontSize: "13px",
+              lineHeight: 1.5,
+              color: darkMode
+                ? "rgba(226,232,240,0.66)"
+                : "rgba(15,23,42,0.62)",
+            }}
+          >
+            Enter the live demo experience across current and future surfaces
           </p>
         </section>
 
@@ -613,13 +713,13 @@ const res = await fetch(`${API_BASE}/api/subscribe`, {
                     fontSize: "16px",
                     lineHeight: 1.6,
                     color: darkMode
-                      ? "rgba(226,232,240,0.78)"
-                      : "rgba(15,23,42,0.7)",
+                      ? "rgba(226,232,240,0.72)"
+                      : "rgba(15,23,42,0.66)",
                   }}
                 >
                   Explore the full Fit Passport journey — from identity creation
-                  to recommendation, checkout confidence, learning, and retailer
-                  value.
+                  to recommendation, checkout confidence, learning, retailer
+                  value, and future environment intelligence.
                 </p>
               </div>
 
@@ -643,6 +743,20 @@ const res = await fetch(`${API_BASE}/api/subscribe`, {
                   style={getToggleButtonStyle("lorna")}
                 >
                   Lorna Jane Pilot
+                </button>
+
+                <button
+                  onClick={() => setDemoMode("automotive")}
+                  style={getToggleButtonStyle("automotive")}
+                >
+                  Automotive Comfort
+                </button>
+
+                <button
+                  onClick={() => setDemoMode("sleep")}
+                  style={getToggleButtonStyle("sleep")}
+                >
+                  Sleep Intelligence
                 </button>
               </div>
 
@@ -668,41 +782,143 @@ const res = await fetch(`${API_BASE}/api/subscribe`, {
                   <p style={metaValueStyle}>{modeMeta.focus}</p>
                 </div>
               </div>
+
+              {demoMode === "automotive" && (
+                <div
+                  style={{
+                    ...metaCardStyle,
+                    display: "flex",
+                    alignItems: "flex-start",
+                    gap: "12px",
+                  }}
+                >
+                  <div
+                    style={{
+                      width: "38px",
+                      height: "38px",
+                      borderRadius: "14px",
+                      display: "grid",
+                      placeItems: "center",
+                      flexShrink: 0,
+                      background: darkMode
+                        ? "linear-gradient(135deg, rgba(20,184,166,0.2), rgba(34,211,238,0.2))"
+                        : "linear-gradient(135deg, rgba(20,184,166,0.12), rgba(34,211,238,0.12))",
+                      border: darkMode
+                        ? "1px solid rgba(255,255,255,0.08)"
+                        : "1px solid rgba(15,23,42,0.08)",
+                    }}
+                  >
+                    <CarFront
+                      size={18}
+                      color={darkMode ? "#ccfbf1" : "#0f172a"}
+                    />
+                  </div>
+
+                  <div>
+                    <p style={metaLabelStyle}>Why this matters</p>
+                    <p
+                      style={{
+                        margin: "8px 0 0",
+                        color: darkMode
+                          ? "rgba(226,232,240,0.78)"
+                          : "rgba(15,23,42,0.72)",
+                        lineHeight: 1.6,
+                      }}
+                    >
+                      This shows how SmarterFit can evolve from apparel fit
+                      intelligence into the system that helps future environments
+                      adapt around the human body.
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {demoMode === "sleep" && (
+                <div
+                  style={{
+                    ...metaCardStyle,
+                    display: "flex",
+                    alignItems: "flex-start",
+                    gap: "12px",
+                  }}
+                >
+                  <div
+                    style={{
+                      width: "38px",
+                      height: "38px",
+                      borderRadius: "14px",
+                      display: "grid",
+                      placeItems: "center",
+                      flexShrink: 0,
+                      background: darkMode
+                        ? "linear-gradient(135deg, rgba(168,85,247,0.2), rgba(244,114,182,0.2))"
+                        : "linear-gradient(135deg, rgba(168,85,247,0.12), rgba(244,114,182,0.12))",
+                      border: darkMode
+                        ? "1px solid rgba(255,255,255,0.08)"
+                        : "1px solid rgba(15,23,42,0.08)",
+                    }}
+                  >
+                    <Sparkles
+                      size={18}
+                      color={darkMode ? "#f5d0fe" : "#0f172a"}
+                    />
+                  </div>
+
+                  <div>
+                    <p style={metaLabelStyle}>Why this matters</p>
+                    <p
+                      style={{
+                        margin: "8px 0 0",
+                        color: darkMode
+                          ? "rgba(226,232,240,0.78)"
+                          : "rgba(15,23,42,0.72)",
+                        lineHeight: 1.6,
+                      }}
+                    >
+                      This shows how SmarterFit can evolve from apparel fit
+                      intelligence into the system that helps future sleep
+                      environments adapt around the human body.
+                    </p>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 
           <div
-  style={{
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    width: "100%",
-    gap: "14px",
-  }}
->
-  <div
-    style={{
-      display: "flex",
-      justifyContent: "center",
-      width: "100%",
-    }}
-  >
-    <ActiveDemoComponent />
-  </div>
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              width: "100%",
+              gap: "14px",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                width: "100%",
+              }}
+            >
+              <ActiveDemoComponent />
+            </div>
 
-  <p
-    style={{
-      margin: 0,
-      fontSize: "12px",
-      lineHeight: 1.5,
-      textAlign: "center",
-      color: darkMode ? "rgba(226,232,240,0.55)" : "rgba(15,23,42,0.55)",
-      letterSpacing: "0.02em",
-    }}
-  >
-    Demo brands shown for illustrative purposes only. No affiliation.
-  </p>
-</div>
+            <p
+              style={{
+                margin: 0,
+                fontSize: "12px",
+                lineHeight: 1.5,
+                textAlign: "center",
+                color: darkMode
+                  ? "rgba(226,232,240,0.55)"
+                  : "rgba(15,23,42,0.55)",
+                letterSpacing: "0.02em",
+              }}
+            >
+              Demo brands shown for illustrative purposes only. No affiliation.
+            </p>
+          </div>
         </section>
 
         <section className="fit-graph-section">
@@ -715,17 +931,17 @@ const res = await fetch(`${API_BASE}/api/subscribe`, {
 
             <p className="fit-graph-copy">
               A system that captures, learns, and compounds. SmarterFit is not
-              just recommending a size — it is building a reusable fit graph that
-              connects body profiles, garment behaviour, brand sizing systems, and
-              real purchase outcomes over time.
+              just recommending a size — it is building a reusable fit graph
+              that connects body profiles, garment behaviour, brand sizing
+              systems, and real purchase outcomes over time.
             </p>
 
             <div className="fit-graph-grid">
               <div className="fit-graph-card">
                 <h3>Capture</h3>
                 <p>
-                  Phone-based inputs create a privacy-first Fit Passport owned by
-                  the shopper.
+                  Phone-based inputs create a privacy-first Fit Passport owned
+                  by the shopper.
                 </p>
               </div>
 
@@ -740,8 +956,8 @@ const res = await fetch(`${API_BASE}/api/subscribe`, {
               <div className="fit-graph-card">
                 <h3>Learn</h3>
                 <p>
-                  Kept, returned, exchanged, or corrected outcomes strengthen the
-                  model and improve future accuracy.
+                  Kept, returned, exchanged, or corrected outcomes strengthen
+                  the model and improve future accuracy.
                 </p>
               </div>
 
@@ -811,8 +1027,9 @@ const res = await fetch(`${API_BASE}/api/subscribe`, {
                   <p className="pilot-modal-eyebrow">Request a Pilot</p>
                   <h2>Start a pilot conversation</h2>
                   <p className="pilot-modal-copy">
-                    Tell us a little about your brand and ecommerce volume. We’ll
-                    use this to understand pilot fit and reach out directly.
+                    Tell us a little about your brand and ecommerce volume.
+                    We’ll use this to understand pilot fit and reach out
+                    directly.
                   </p>
                 </div>
 

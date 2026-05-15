@@ -2654,3 +2654,189 @@ select:focus {
     grid-template-columns: 1fr;
   }
 }
+.body-silhouette-card.automotive {
+  min-height: 220px;
+}
+
+.body-outline.seated {
+  position: relative;
+  width: 120px;
+  height: 150px;
+  margin: 0 auto;
+  border-radius: 40px 40px 28px 28px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background:
+    radial-gradient(circle at 50% 20%, rgba(255,255,255,0.14), transparent 28%),
+    linear-gradient(180deg, rgba(138,92,255,0.20), rgba(0,229,255,0.10));
+  box-shadow:
+    0 0 30px rgba(140, 90, 255, 0.18),
+    inset 0 0 25px rgba(255,255,255,0.04);
+}
+
+.body-outline.seated::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -18px;
+  transform: translateX(-50%);
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.35), rgba(138,92,255,0.2));
+  box-shadow: 0 0 18px rgba(0,229,255,0.18);
+}
+
+.body-outline.seated::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -22px;
+  transform: translateX(-50%);
+  width: 86px;
+  height: 20px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(138,92,255,0.18), rgba(0,229,255,0.18));
+  filter: blur(2px);
+}
+
+.hotspot.knees {
+  position: absolute;
+  left: 50%;
+  bottom: 12px;
+  transform: translateX(-50%);
+}
+
+.hotspot.head {
+  position: absolute;
+  left: 50%;
+  top: -4px;
+  transform: translateX(-50%);
+}
+
+.automotive-adjustments-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.automotive-adjustments-preview span {
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.86);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.vehicle-detail-card {
+  margin-top: 16px;
+  padding: 18px;
+  border-radius: 24px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.03));
+  box-shadow:
+    0 16px 40px rgba(0,0,0,0.24),
+    0 0 32px rgba(138,92,255,0.10);
+}
+
+.vehicle-detail-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.vehicle-detail-header h3 {
+  margin: 4px 0 0;
+  font-size: 20px;
+  line-height: 1.1;
+}
+
+.vehicle-score-pill {
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(90deg, rgba(138,92,255,0.9), rgba(0,229,255,0.9));
+  box-shadow: 0 0 18px rgba(138,92,255,0.18);
+}
+
+.vehicle-adjustment-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.adjustment-card {
+  padding: 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.045);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.adjustment-card svg {
+  opacity: 0.85;
+}
+
+.adjustment-card span {
+  font-size: 12px;
+  color: rgba(255,255,255,0.70);
+}
+
+.adjustment-card strong {
+  font-size: 15px;
+  color: #fff;
+}
+
+.vehicle-detail-note {
+  margin: 16px 0 0;
+  color: rgba(255,255,255,0.82);
+  font-size: 14px;
+}
+
+@media (max-width: 640px) {
+  .vehicle-adjustment-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.demo-shell.flagship-demo .eyebrow {
+  letter-spacing: 0.22em;
+}
+
+.demo-shell.flagship-demo .premium-ribbon {
+  background: linear-gradient(
+    90deg,
+    rgba(34, 211, 238, 0.14),
+    rgba(244, 114, 182, 0.12)
+  );
+}
+
+.demo-shell.flagship-demo .premium-ribbon-dot {
+  background: linear-gradient(180deg, #67e8f9, #f472b6);
+  box-shadow: 0 0 12px rgba(103, 232, 249, 0.55);
+}
+
+.demo-shell.flagship-demo .fit-score-pill,
+.demo-shell.flagship-demo .size-pill,
+.demo-shell.flagship-demo .scan-pill {
+  background: linear-gradient(
+    135deg,
+    rgba(34, 211, 238, 0.18),
+    rgba(217, 70, 239, 0.18)
+  );
+}
+
+.demo-shell.flagship-demo .hero-match-card {
+  box-shadow:
+    0 0 0 1px rgba(103, 232, 249, 0.08),
+    0 18px 34px rgba(0, 0, 0, 0.24),
+    0 0 26px rgba(34, 211, 238, 0.08);
+}
